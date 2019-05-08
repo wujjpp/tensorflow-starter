@@ -29,19 +29,23 @@ def create_model():
 
   return model
 
-# include the epoch in the file name. (uses `str.format`)
-checkpoint_path = "training_2/cp-{epoch:04d}.ckpt"
-checkpoint_dir = os.path.dirname(checkpoint_path)
+def main():
+  # include the epoch in the file name. (uses `str.format`)
+  checkpoint_path = "training_2/cp-{epoch:04d}.ckpt"
+  checkpoint_dir = os.path.dirname(checkpoint_path)
 
-# create a fresh model then evaluate
-model = create_model()
-loss, acc = model.evaluate(test_images, test_labels)
-print("Untrained model, accuracy: {:5.2f}%".format(100*acc))
+  # create a fresh model then evaluate
+  model = create_model()
+  loss, acc = model.evaluate(test_images, test_labels)
+  print("Untrained model, accuracy: {:5.2f}%".format(100*acc))
 
-# create a fresh model then load_weights, at last evaluate
-latest = tf.train.latest_checkpoint(checkpoint_dir)
-print('latest checkpoint: ' + latest)
-model = create_model()
-model.load_weights(latest)
-loss,acc = model.evaluate(test_images, test_labels)
-print("Restored model, accuracy: {:5.2f}%".format(100*acc))
+  # create a fresh model then load_weights, at last evaluate
+  latest = tf.train.latest_checkpoint(checkpoint_dir)
+  print('latest checkpoint: ' + latest)
+  model = create_model()
+  model.load_weights(latest)
+  loss,acc = model.evaluate(test_images, test_labels)
+  print("Restored model, accuracy: {:5.2f}%".format(100*acc))
+
+if __name__ == '__main__':
+  main()

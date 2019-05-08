@@ -1,7 +1,5 @@
 from __future__ import absolute_import, division, print_function
 
-import os
-
 import tensorflow as tf
 from tensorflow import keras
 
@@ -29,21 +27,24 @@ def create_model():
 
   return model
 
-# Create a basic model instance
-model = create_model()
-model.summary()
+def main():
+  # Create a basic model instance
+  model = create_model()
+  model.summary()
 
-# include the epoch in the file name. (uses `str.format`)
-checkpoint_path = "training_2/cp-{epoch:04d}.ckpt"
-checkpoint_dir = os.path.dirname(checkpoint_path)
+  # include the epoch in the file name. (uses `str.format`)
+  checkpoint_path = "training_2/cp-{epoch:04d}.ckpt"
 
-cp_callback = tf.keras.callbacks.ModelCheckpoint(
-    checkpoint_path, verbose=1, save_weights_only=True,
-    # Save weights, every 5-epochs.
-    period=5)
+  cp_callback = tf.keras.callbacks.ModelCheckpoint(
+      checkpoint_path, verbose=1, save_weights_only=True,
+      # Save weights, every 5-epochs.
+      period=5)
 
-model = create_model()
-model.fit(train_images, train_labels,
-          epochs = 50, callbacks = [cp_callback],
-          validation_data = (test_images,test_labels),
-          verbose = 0)
+  model = create_model()
+  model.fit(train_images, train_labels,
+            epochs = 50, callbacks = [cp_callback],
+            validation_data = (test_images,test_labels),
+            verbose = 0)
+
+if __name__ == '__main__':
+  main()

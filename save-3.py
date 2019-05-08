@@ -29,14 +29,18 @@ def create_model():
 
   return model
 
-# Create a basic model instance
-model = create_model()
-model.summary()
+def main():
+  # Create a basic model instance
+  model = create_model()
+  model.summary()
 
-model = create_model()
-model.fit(train_images, train_labels,
-          epochs = 50,
-          validation_data = (test_images,test_labels))
+  model = create_model()
+  model.fit(train_images, train_labels,
+            epochs = 50,
+            validation_data = (test_images,test_labels))
 
-# Save entire model to a HDF5 file
-model.save('my_model.h5')
+  # Save entire model to a HDF5 file
+  model.save('my_model.h5')
+
+if __name__ == '__main__':
+  main()

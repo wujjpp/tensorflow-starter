@@ -1,7 +1,5 @@
 from __future__ import absolute_import, division, print_function
 
-import os
-
 import tensorflow as tf
 from tensorflow import keras
 
@@ -29,19 +27,22 @@ def create_model():
 
   return model
 
-checkpoint_path = "training_1/cp.ckpt"
-checkpoint_dir = os.path.dirname(checkpoint_path)
+def main():
+  checkpoint_path = "training_1/cp.ckpt"
+  
+  # Create a fresh model for tesing
+  model = create_model()
 
-# Create a fresh model for tesing
-model = create_model()
+  # then evaluate
+  loss, acc = model.evaluate(test_images, test_labels)
+  print("Untrained model, accuracy: {:5.2f}%".format(100*acc))
 
-# then evaluate
-loss, acc = model.evaluate(test_images, test_labels)
-print("Untrained model, accuracy: {:5.2f}%".format(100*acc))
+  # Load saved checkpoint
+  model.load_weights(checkpoint_path)
+  loss,acc = model.evaluate(test_images, test_labels)
+  print("Restored model, accuracy: {:5.2f}%".format(100*acc))
 
-# Load saved checkpoint
-model.load_weights(checkpoint_path)
-loss,acc = model.evaluate(test_images, test_labels)
-print("Restored model, accuracy: {:5.2f}%".format(100*acc))
+if __name__ == '__main__':
+  main()  
 
 

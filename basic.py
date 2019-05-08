@@ -7,9 +7,12 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
-print('tf.version: ' + str(tf.__version__))
-print('np.version: ' + str(np.__version__))
-print('matplotlib.version: ' + str(matplotlib.__version__))
+def print_version():
+  print('tf.version: ' + str(tf.__version__))
+  print('np.version: ' + str(np.__version__))
+  print('matplotlib.version: ' + str(matplotlib.__version__))
+
+print_version()
 
 fashion_mnist = keras.datasets.fashion_mnist
 
@@ -49,27 +52,20 @@ test_images = test_images / 255.0
 
 # plt.show()
 
-model = keras.Sequential([
-    keras.layers.Flatten(input_shape=(28, 28)),
-    keras.layers.Dense(128, activation=tf.nn.relu),
-    keras.layers.Dense(10, activation=tf.nn.softmax)
-])
+def create_model():
+  model = keras.Sequential([
+      keras.layers.Flatten(input_shape=(28, 28)),
+      keras.layers.Dense(128, activation=tf.nn.relu),
+      keras.layers.Dense(10, activation=tf.nn.softmax)
+  ])
 
-model.summary()
+  model.summary()
 
-model.compile(optimizer=tf.train.AdamOptimizer(),
-    loss='sparse_categorical_crossentropy',
-    metrics=['accuracy'])
+  model.compile(optimizer=tf.train.AdamOptimizer(),
+      loss='sparse_categorical_crossentropy',
+      metrics=['accuracy'])
 
-model.fit(train_images, train_labels, epochs=5)
-
-# 评估准确率
-test_loss, test_acc = model.evaluate(test_images, test_labels)
-
-print('Test accuracy:', test_acc)
-
-# 图形化方式显示准确率
-predictions = model.predict(test_images)
+  return model    
 
 def plot_image(i, predictions_array, true_label, img):
   predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
@@ -102,26 +98,42 @@ def plot_value_array(i, predictions_array, true_label):
   thisplot[predicted_label].set_color('red')
   thisplot[true_label].set_color('blue')
 
-num_rows = 5
-num_cols = 3
-num_images = num_rows*num_cols
-plt.figure(figsize=(2*2*num_cols, 2*num_rows))
-for i in range(num_images):
-  plt.subplot(num_rows, 2*num_cols, 2*i+1)
-  plot_image(i, predictions, test_labels, test_images)
-  plt.subplot(num_rows, 2*num_cols, 2*i+2)
-  plot_value_array(i, predictions, test_labels)
-plt.show()
+def main():
+  model = create_model()
 
-# 单个样本预测
-img = test_images[0]
-print(img.shape)
-img = (np.expand_dims(img,0))
-print(img.shape)
+  model.fit(train_images, train_labels, epochs=5)
 
-predictions_single = model.predict(img)
-print(predictions_single)
+  # 评估准确率
+  test_loss, test_acc = model.evaluate(test_images, test_labels)
 
-plot_value_array(0, predictions_single, test_labels)
-_ = plt.xticks(range(10), class_names, rotation=45)
-plt.show()
+  print('Test accuracy:', test_acc)
+
+  # 图形化方式显示准确率
+  predictions = model.predict(test_images)
+
+  num_rows = 5
+  num_cols = 3
+  num_images = num_rows*num_cols
+  plt.figure(figsize=(2*2*num_cols, 2*num_rows))
+  for i in range(num_images):
+    plt.subplot(num_rows, 2*num_cols, 2*i+1)
+    plot_image(i, predictions, test_labels, test_images)
+    plt.subplot(num_rows, 2*num_cols, 2*i+2)
+    plot_value_array(i, predictions, test_labels)
+  plt.show()
+
+  # 单个样本预测
+  img = test_images[0]
+  print(img.shape)
+  img = (np.expand_dims(img,0))
+  print(img.shape)
+
+  predictions_single = model.predict(img)
+  print(predictions_single)
+
+  plot_value_array(0, predictions_single, test_labels)
+  _ = plt.xticks(range(10), class_names, rotation=45)
+  plt.show()
+
+if __name__ == '__main__':
+  main()
