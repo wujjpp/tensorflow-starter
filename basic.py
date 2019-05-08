@@ -12,8 +12,6 @@ def print_version():
   print('np.version: ' + str(np.__version__))
   print('matplotlib.version: ' + str(matplotlib.__version__))
 
-print_version()
-
 fashion_mnist = keras.datasets.fashion_mnist
 
 (train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
@@ -25,32 +23,30 @@ print('train_images.shape: ' + str(train_images.shape))
 print('train_labels: ' + str(train_labels))
 print('len(train_labels): ' + str(len(train_labels)))
 
-
 print('--------test data info--------')
 print('test_images.shape: ' + str(test_images.shape))
 print('test_labels: ' + str(test_labels))
 print('len(test_labels): ' + str(len(test_labels)))
 
-# plt.figure()
-# plt.imshow(train_images[0])
-# plt.colorbar()
-# plt.grid(False)
-# plt.show()
+plt.figure()
+plt.imshow(train_images[0])
+plt.colorbar()
+plt.grid(False)
 
 train_images = train_images / 255.0
 test_images = test_images / 255.0
 
-# plt.figure(figsize=(10,10))
-# for i in range(25):
-#     plt.subplot(5,5,i+1)
-#     plt.xticks([])
-#     plt.yticks([])
-#     plt.grid(False)
-#     plt.imshow(train_images[i])
-#     # plt.imshow(train_images[i], cmap=plt.cm.binary)
-#     plt.xlabel(class_names[train_labels[i]])
+plt.figure(figsize=(10,10))
+for i in range(25):
+    plt.subplot(5,5,i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(train_images[i])
+    # plt.imshow(train_images[i], cmap=plt.cm.binary)
+    plt.xlabel(class_names[train_labels[i]])
 
-# plt.show()
+plt.show()
 
 def create_model():
   model = keras.Sequential([
@@ -82,9 +78,9 @@ def plot_image(i, predictions_array, true_label, img):
     color = 'red'
 
   plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label],
-                                100*np.max(predictions_array),
-                                class_names[true_label]),
-                                color=color)
+    100*np.max(predictions_array),
+    class_names[true_label]),
+    color=color)
 
 def plot_value_array(i, predictions_array, true_label):
   predictions_array, true_label = predictions_array[i], true_label[i]
@@ -99,6 +95,9 @@ def plot_value_array(i, predictions_array, true_label):
   thisplot[true_label].set_color('blue')
 
 def main():
+  # print version info
+  print_version()
+
   model = create_model()
 
   model.fit(train_images, train_labels, epochs=5)
