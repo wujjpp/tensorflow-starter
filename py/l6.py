@@ -64,7 +64,14 @@ while True:
 print('##################################################')
 
 def triangles():
-    yield 
+    l = [1]
+    n = 0
+    while n < 10:
+        yield l
+        for n, val in enumerate(l):
+
+        n = n + 1
+        print(n)
 
 results = []
 for t in triangles():
