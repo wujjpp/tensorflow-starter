@@ -14,6 +14,8 @@ for n in g:
     print(n)
 
 print('#################################################')
+
+
 def fib(max):
     n, a, b = 0, 0, 1
     while n < max:
@@ -22,9 +24,11 @@ def fib(max):
         n = n + 1
     return 'done'
 
+
 fib(10)
 
 print('##################################################')
+
 
 def fib(max):
     n, a, b = 0, 0, 1
@@ -34,10 +38,13 @@ def fib(max):
         n = n + 1
     return 'done'
 
+
 for n in fib(10):
     print(n)
 
 print('##################################################')
+
+
 def odd():
     print('step 1')
     yield 1
@@ -45,6 +52,7 @@ def odd():
     yield 3
     print('step 3')
     yield 5
+
 
 o = odd()
 print(next(o))
@@ -63,24 +71,31 @@ while True:
 
 print('##################################################')
 
+# 杨辉三角
+
+
 def triangles():
     l = [1]
-    n = 0
-    while n < 10:
+    while True:
         yield l
-        for n, val in enumerate(l):
+        results = []
+        for n, x in enumerate(l):
+            if(n != 0):
+                results.append(l[n-1] + l[n])
+        results.insert(0, l[0])
+        results.append(l[len(l) - 1])
+        l = results
 
-        n = n + 1
-        print(n)
 
 results = []
+n = 0
 for t in triangles():
     print(t)
     results.append(t)
     n = n + 1
     if n == 10:
         break
-    
+
 if results == [
     [1],
     [1, 1],
