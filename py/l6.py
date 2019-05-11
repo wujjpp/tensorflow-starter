@@ -71,21 +71,20 @@ while True:
 
 print('##################################################')
 
-# 杨辉三角
-
+print('杨辉三角')
 
 def triangles():
     l = [1]
     while True:
         yield l
         results = []
-        for n, x in enumerate(l):
-            if(n != 0):
-                results.append(l[n-1] + l[n])
+        # n > 0 && n < len(l)
+        for n in range(1, len(l)):
+          results.append(l[n-1] + l[n])
+        
         results.insert(0, l[0])
         results.append(l[len(l) - 1])
         l = results
-
 
 results = []
 n = 0
