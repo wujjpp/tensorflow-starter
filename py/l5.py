@@ -1,3 +1,5 @@
+import os
+
 print(list(range(1, 11)))
 
 L = []
@@ -14,9 +16,7 @@ print([m + n for m in 'ABC' for n in 'XYZ'])
 
 ##############################################################
 
-import os
 print([d for d in os.listdir('.')])
-
 
 y = 'alais'
 

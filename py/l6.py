@@ -30,7 +30,7 @@ fib(10)
 print('##################################################')
 
 
-def fib(max):
+def fib2(max):
     n, a, b = 0, 0, 1
     while n < max:
         yield b
@@ -39,7 +39,7 @@ def fib(max):
     return 'done'
 
 
-for n in fib(10):
+for n in fib2(10):
     print(n)
 
 print('##################################################')
@@ -73,18 +73,20 @@ print('##################################################')
 
 print('杨辉三角')
 
+
 def triangles():
-    l = [1]
+    last = [1]
+
     while True:
-        yield l
+        yield last
         results = []
         # n > 0 && n < len(l)
-        for n in range(1, len(l)):
-          results.append(l[n-1] + l[n])
-        
-        results.insert(0, l[0])
-        results.append(l[len(l) - 1])
-        l = results
+        for n in range(1, len(last)):
+            results.append(last[n-1] + last[n])
+        results.insert(0, last[0])
+        results.append(last[len(last) - 1])
+        last = results
+
 
 results = []
 n = 0
