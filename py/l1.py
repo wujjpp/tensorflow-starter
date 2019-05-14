@@ -1,8 +1,7 @@
 import math
 
+
 ##################################################
-
-
 def my_abs(x):
     if not isinstance(x, (int, float)):
         raise TypeError('bad operand type')
@@ -29,9 +28,8 @@ x, y = r
 print(r)
 print(x, y)
 
+
 ##################################################
-
-
 def pow2(x, n=2):
     s = 1
     while n > 0:
