@@ -49,7 +49,7 @@ print('(0, 1, 2, 3, 4, 5)[:3]')
 print((0, 1, 2, 3, 4, 5)[:3])
 
 print("'ABCDEFG'[:3]")
-print('ABCDEFG'[:3])
+print('ABCDEFG' [:3])
 
 
 def trim(s):
@@ -63,8 +63,9 @@ def trim(s):
         # end
         while s[-1:] == ' ':
             s = s[:len(s) - 1]
-    
+
     return s
+
 
 # 测试:
 if trim('hello  ') != 'hello':

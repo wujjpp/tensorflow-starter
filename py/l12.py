@@ -21,7 +21,6 @@ print('g.score =', g.score)
 
 
 class Student2(object):
-
     @property
     def birth(self):
         return self._birth

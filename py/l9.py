@@ -1,4 +1,5 @@
-import time, functools
+import functools
+import time
 
 
 def now():
@@ -12,6 +13,7 @@ def log(func):
     def wrapper(*args, **kw):
         print('call %s():' % func.__name__)
         return func(*args, **kw)
+
     return wrapper
 
 
@@ -29,7 +31,9 @@ def log2(text):
         def wrapper(*args, **kw):
             print('%s %s():' % (text, func.__name__))
             return func(*args, **kw)
+
         return wrapper
+
     return decorator
 
 
@@ -47,6 +51,7 @@ def log3(func):
     def wrapper(*args, **kw):
         print('call %s():' % func.__name__)
         return func(*args, **kw)
+
     return wrapper
 
 
@@ -65,7 +70,9 @@ def log4(text):
         def wrapper(*args, **kw):
             print('%s %s():' % (text, func.__name__))
             return func(*args, **kw)
+
         return wrapper
+
     return decorator
 
 
@@ -87,6 +94,7 @@ def metric(func):
         t = (end - start) * 1000  # convert to ms
         print('%s executed in %s ms' % (func.__name__, t))
         return result
+
     return wrapper
 
 
@@ -109,7 +117,6 @@ if f != 33:
     print('测试失败!')
 elif s != 7986:
     print('测试失败!')
-
 
 int2 = functools.partial(int, base=2)
 print(int2('1000000'))

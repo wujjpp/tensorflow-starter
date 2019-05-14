@@ -31,7 +31,7 @@ print([s.lower() for s in L])
 
 ###############################################################
 L1 = ['Hello', 'World', 18, 'Apple', None]
-L2 = [v.lower() for v in L1 if isinstance(v, str) ]
+L2 = [v.lower() for v in L1 if isinstance(v, str)]
 
 print(L2)
 

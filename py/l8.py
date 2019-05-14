@@ -30,8 +30,16 @@ def add(x, y):
 print(reduce(add, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 
 DIGITS = {
-    '0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
-    '5': 5, '6': 6, '7': 7, '8': 8, '9': 9
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9
 }
 
 
@@ -42,6 +50,7 @@ def char2num(s):
 def str2int(s):
     def fn(x, y):
         return x * 10 + y
+
     return reduce(fn, map(char2num, s))
 
 
@@ -84,7 +93,6 @@ for n in primes():
 print(sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower))
 print(sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True))
 
-
 students = [('Bob', 75), ('Adam', 92), ('Bart', 66), ('Lisa', 88)]
 print(sorted(students, key=itemgetter(0)))  # 按名字升序
 print(sorted(students, key=lambda t: t[1]))  # 按分数升序
@@ -97,6 +105,7 @@ def lazy_sum(*args):
         for n in args:
             ax = ax + n
         return ax
+
     return sum
 
 
@@ -108,8 +117,10 @@ print(f())
 def count():
     def f(j):
         def g():
-            return j*j
+            return j * j
+
         return g
+
     fs = []
     for i in range(1, 4):
         fs.append(f(i))  # f(i)立刻被执行，因此i的当前值被传入f()
@@ -129,6 +140,7 @@ def createCounter():
         nonlocal current
         current = current + 1
         return current
+
     return counter
 
 

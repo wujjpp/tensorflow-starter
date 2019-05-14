@@ -24,7 +24,7 @@ def move(x, y, step, angle=0):
     return nx, ny
 
 
-r = move(0, 0, 100, math.pi/2)
+r = move(0, 0, 100, math.pi / 2)
 x, y = r
 print(r)
 print(x, y)

@@ -91,7 +91,7 @@ def move(n, a, b, c):
     if n == 1:
         print(a, ' --> ', c)
     else:
-        move(n - 1, a, c, b)  # 把A柱上的n-1个珠子借助C,移到B柱 
+        move(n - 1, a, c, b)  # 把A柱上的n-1个珠子借助C, 移到B柱
         move(1, a, b, c)  # 把A柱上第n的珠子移到C柱
         move(n - 1, b, a, c)  # 把B柱上n-1个珠子借助A柱，移到C柱
 
