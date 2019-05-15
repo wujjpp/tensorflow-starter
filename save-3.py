@@ -7,7 +7,9 @@ from tensorflow import keras
 
 print('tf.version:' + str(tf.__version__))
 
-(train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data()
+(train_images,
+ train_labels), (test_images,
+                 test_labels) = tf.keras.datasets.mnist.load_data()
 
 train_labels = train_labels[:1000]
 test_labels = test_labels[:1000]
@@ -15,32 +17,36 @@ test_labels = test_labels[:1000]
 train_images = train_images[:1000].reshape(-1, 28 * 28) / 255.0
 test_images = test_images[:1000].reshape(-1, 28 * 28) / 255.0
 
+
 # Returns a short sequential model
 def create_model():
-  model = tf.keras.models.Sequential([
-    keras.layers.Dense(512, activation=tf.nn.relu, input_shape=(784,)),
-    keras.layers.Dropout(0.2),
-    keras.layers.Dense(10, activation=tf.nn.softmax)
-  ])
+    model = tf.keras.models.Sequential([
+        keras.layers.Dense(512, activation=tf.nn.relu, input_shape=(784, )),
+        keras.layers.Dropout(0.2),
+        keras.layers.Dense(10, activation=tf.nn.softmax)
+    ])
 
-  model.compile(optimizer=tf.keras.optimizers.Adam(),
-                loss=tf.keras.losses.sparse_categorical_crossentropy,
-                metrics=['accuracy'])
+    model.compile(optimizer=tf.keras.optimizers.Adam(),
+                  loss=tf.keras.losses.sparse_categorical_crossentropy,
+                  metrics=['accuracy'])
 
-  return model
+    return model
+
 
 def main():
-  # Create a basic model instance
-  model = create_model()
-  model.summary()
+    # Create a basic model instance
+    model = create_model()
+    model.summary()
 
-  model = create_model()
-  model.fit(train_images, train_labels,
-            epochs = 50,
-            validation_data = (test_images,test_labels))
+    model = create_model()
+    model.fit(train_images,
+              train_labels,
+              epochs=50,
+              validation_data=(test_images, test_labels))
 
-  # Save entire model to a HDF5 file
-  model.save('my_model.h5')
+    # Save entire model to a HDF5 file
+    model.save('my_model.h5')
+
 
 if __name__ == '__main__':
-  main()
+    main()

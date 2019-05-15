@@ -16,9 +16,13 @@ def print_version():
 
 fashion_mnist = keras.datasets.fashion_mnist
 
-(train_images, train_labels), (test_images, test_labels) = fashion_mnist.load_data()
+(train_images, train_labels), (test_images,
+                               test_labels) = fashion_mnist.load_data()
 
-class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+class_names = [
+    'T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt',
+    'Sneaker', 'Bag', 'Ankle boot'
+]
 
 print('--------train data info--------')
 print('train_images.shape: ' + str(train_images.shape))
@@ -38,12 +42,12 @@ plt.grid(False)
 train_images = train_images / 255.0
 test_images = test_images / 255.0
 
-plt.figure(figsize=(10,10))
+plt.figure(figsize=(10, 10))
 for i in range(25):
-    plt.subplot(5,5,i+1)
+    plt.subplot(5, 5, i + 1)
     plt.xticks([])
     plt.yticks([])
-    plt.imshow(train_images[i])    
+    plt.imshow(train_images[i])
     plt.grid(True)
     # plt.imshow(train_images[i], cmap=plt.cm.binary)
     plt.xlabel(class_names[train_labels[i]])
@@ -60,21 +64,21 @@ def create_model():
 
     model.summary()
 
-    model.compile(
-        optimizer=tf.train.AdamOptimizer(),
-        loss='sparse_categorical_crossentropy',
-        metrics=['accuracy'])
+    model.compile(optimizer=tf.train.AdamOptimizer(),
+                  loss='sparse_categorical_crossentropy',
+                  metrics=['accuracy'])
 
     return model
 
 
 def plot_image(i, predictions_array, true_label, img):
-    predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
+    predictions_array, true_label, img = predictions_array[i], true_label[
+        i], img[i]
     plt.grid(False)
     plt.xticks([])
     plt.yticks([])
 
-    plt.imshow(img, cmap = plt.cm.binary)
+    plt.imshow(img, cmap=plt.cm.binary)
 
     predicted_label = np.argmax(predictions_array)
     if predicted_label == true_label:
@@ -82,11 +86,10 @@ def plot_image(i, predictions_array, true_label, img):
     else:
         color = 'red'
 
-    plt.xlabel("{} {:2.0f}% ({})".format(
-        class_names[predicted_label],
-        100*np.max(predictions_array),
-        class_names[true_label]),
-        color=color)
+    plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label],
+                                         100 * np.max(predictions_array),
+                                         class_names[true_label]),
+               color=color)
 
 
 def plot_value_array(i, predictions_array, true_label):
@@ -120,19 +123,19 @@ def main():
 
     num_rows = 5
     num_cols = 3
-    num_images = num_rows*num_cols
-    plt.figure(figsize=(2*2*num_cols, 2*num_rows))
+    num_images = num_rows * num_cols
+    plt.figure(figsize=(2 * 2 * num_cols, 2 * num_rows))
     for i in range(num_images):
-        plt.subplot(num_rows, 2*num_cols, 2*i+1)
+        plt.subplot(num_rows, 2 * num_cols, 2 * i + 1)
         plot_image(i, predictions, test_labels, test_images)
-        plt.subplot(num_rows, 2*num_cols, 2*i+2)
+        plt.subplot(num_rows, 2 * num_cols, 2 * i + 2)
         plot_value_array(i, predictions, test_labels)
     plt.show()
 
     # 单个样本预测
     img = test_images[0]
     print(img.shape)
-    img = (np.expand_dims(img,0))
+    img = (np.expand_dims(img, 0))
     print(img.shape)
 
     predictions_single = model.predict(img)

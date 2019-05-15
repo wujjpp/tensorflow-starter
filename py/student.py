@@ -1,9 +1,7 @@
-
 __version__ = '1.0.0'
 
 
 class Student1(object):
-
     def __init__(self, name, score):
         self.name = name
         self.score = score
@@ -13,7 +11,6 @@ class Student1(object):
 
 
 class Student2(object):
-
     def __init__(self, name, score):
         self.__name = name
         self.__score = score
@@ -21,7 +18,7 @@ class Student2(object):
     def get_name(self):
         return self.__name
 
-    def get_score(self):        
+    def get_score(self):
         return self.__score
 
     def set_score(self, score):
@@ -43,7 +40,7 @@ class Student3(object):
         return self.__gender
 
     def set_gender(self, gender):
-        if(gender != 'male' and gender != 'female'):
+        if (gender != 'male' and gender != 'female'):
             raise ValueError('Gender must be "male" or "female"')
 
         self.__gender = gender
