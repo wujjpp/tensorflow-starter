@@ -6,7 +6,7 @@ import random
 
 
 # 写数据进程执行的代码:
-def write(q):
+def write(q: Queue) -> None:
     print('Process to write: %s' % os.getpid())
     for value in ['A', 'B', 'C']:
         print('Put %s to queue...' % value)
@@ -15,7 +15,7 @@ def write(q):
 
 
 # 读数据进程执行的代码:
-def read(q):
+def read(q: Queue) -> None:
     print('Process to read: %s' % os.getpid())
     while True:
         value = q.get(True)
