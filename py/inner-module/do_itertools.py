@@ -28,3 +28,10 @@ assert 3.13 < pi(100) < 3.14
 assert 3.140 < pi(1000) < 3.141
 assert 3.1414 < pi(10000) < 3.1415
 print('ok')
+
+b = b'Hello, world!'
+print(type(b))
+print(b)
+s = b.decode('ascii')
+print(type(s))
+print(s)
