@@ -1,5 +1,4 @@
 from datetime import datetime
-import time
 
 
 def log(*args):
